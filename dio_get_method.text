@@ -1,0 +1,40 @@
+//In order to make a GET request in Flutter using the Dio library, you can use the Dio.get method. Here's an example of how to use it:
+
+
+import 'package:dio/dio.dart';
+
+Dio dio = Dio();
+
+try {
+  Response response = await dio.get("https://jsonplaceholder.typicode.com/posts");
+  print(response.data);
+} catch (e) {
+  print(e);
+}
+//In this example, the dio.get method is used to send a GET request to the specified URL ("https://jsonplaceholder.typicode.com/posts"). The await keyword is used to wait for the response, which is then stored in the response variable. The response.data property contains the JSON data returned by the API.
+
+//You can also add query parameters to your request by passing a Map to the queryParameters property of the options map.
+
+
+try {
+  Response response = await dio.get("https://jsonplaceholder.typicode.com/posts", queryParameters: { "id": 1 });
+  print(response.data);
+} catch (e) {
+  print(e);
+}
+//You can also add custom headers to your requests by passing a Map to the headers property of the options map, for example:
+
+
+try {
+  Response response = await dio.get("https://jsonplaceholder.typicode.com/posts", 
+  options: Options(headers: {
+        "Authorization": "Bearer my_access_token",
+        "custom_header_name": "custom_header_value"
+  }));
+  print(response.data);
+} catch (e) {
+  print(e);
+}
+It is a good practice to also handle the errors in case something went wrong with the request, 
+for example the url is not correct or the api is down, by using the catch statement like in 
+the examples above.
